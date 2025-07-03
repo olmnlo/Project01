@@ -47,10 +47,10 @@ public class Main {
         while (true) {
             switch (who_play) {
                 case 0:
-                    game_board = player(game_board);
+                    game_board = player(game_board, true);
                     break;
                 case 1:
-                    game_board = computer(game_board);
+                    game_board = computer(game_board, true);
                     break;
             }
             if (checkIsWinner(game_board) && who_play == 0){
@@ -146,10 +146,9 @@ public class Main {
     }
 
 
-    public static String[][] player(String[][] game_board){
+    public static String[][] player(String[][] game_board, boolean turn){
         Scanner scn = new Scanner(System.in);
-        boolean played = true;
-        while (played) {
+        while (turn) {
             printBoard(game_board, 0);
             System.out.println("""                    
                     1|2|3
@@ -165,7 +164,7 @@ public class Main {
                     case 1:
                         if (checkIsEmptyPlace(game_board, 0, 0)) {
                             game_board[0][0] = "X";
-                            played = false;
+                            turn = false;
                         } else {
                             System.err.println("It is not empty place you can not put your X here");
                         }
@@ -173,7 +172,7 @@ public class Main {
                     case 2:
                         if (checkIsEmptyPlace(game_board, 0, 1)) {
                             game_board[0][1] = "X";
-                            played = false;
+                            turn = false;
                         } else {
                             System.err.println("It is not empty place you can not put your X here");
                         }
@@ -181,7 +180,7 @@ public class Main {
                     case 3:
                         if (checkIsEmptyPlace(game_board, 0, 2)) {
                             game_board[0][2] = "X";
-                            played = false;
+                            turn = false;
                         } else {
                             System.err.println("It is not empty place you can not put your X here");
                         }
@@ -189,7 +188,7 @@ public class Main {
                     case 4:
                         if (checkIsEmptyPlace(game_board, 1, 0)) {
                             game_board[1][0] = "X";
-                            played = false;
+                            turn = false;
                         } else {
                             System.err.println("It is not empty place you can not put your X here");
                         }
@@ -197,7 +196,7 @@ public class Main {
                     case 5:
                         if (checkIsEmptyPlace(game_board, 1, 1)) {
                             game_board[1][1] = "X";
-                            played = false;
+                            turn = false;
                         } else {
                             System.err.println("It is not empty place you can not put your X here");
                         }
@@ -205,7 +204,7 @@ public class Main {
                     case 6:
                         if (checkIsEmptyPlace(game_board, 1, 2)) {
                             game_board[1][2] = "X";
-                            played = false;
+                            turn = false;
                         } else {
                             System.err.println("It is not empty place you can not put your X here");
                         }
@@ -213,7 +212,7 @@ public class Main {
                     case 7:
                         if (checkIsEmptyPlace(game_board, 2, 0)) {
                             game_board[2][0] = "X";
-                            played = false;
+                            turn = false;
                         } else {
                             System.err.println("It is not empty place you can not put your X here");
                         }
@@ -221,7 +220,7 @@ public class Main {
                     case 8:
                         if (checkIsEmptyPlace(game_board, 2, 1)) {
                             game_board[2][1] = "X";
-                            played = false;
+                            turn = false;
                         } else {
                             System.err.println("It is not empty place you can not put your X here");
                         }
@@ -229,7 +228,7 @@ public class Main {
                     case 9:
                         if (checkIsEmptyPlace(game_board, 2, 2)) {
                             game_board[2][2] = "X";
-                            played = false;
+                            turn = false;
                         } else {
                             System.err.println("It is not empty place you can not put your X here");
                         }
@@ -358,16 +357,15 @@ public class Main {
 
 
 
-    public static String[][] computer(String[][] game_board){
+    public static String[][] computer(String[][] game_board, boolean turn){
         Random rand = new Random();
         printBoard(game_board, 1);
-        boolean played = true;
-        while (played) {
+        while (turn) {
             int indix_i = rand.nextInt(3);
             int indix_j = rand.nextInt(3);
             if (checkIsEmptyPlace(game_board, indix_i, indix_j)) {
                 game_board[indix_i][indix_j] = "O";
-                played = false;
+                turn = false;
             }
         }
         return game_board;
