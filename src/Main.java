@@ -151,7 +151,6 @@ public class Main {
         boolean played = true;
         while (played) {
             printBoard(game_board, 0);
-            System.out.println("Enter where do you want to play: ");
             System.out.println("""                    
                     1|2|3
                     -----
@@ -159,6 +158,7 @@ public class Main {
                     -----
                     7|8|9
                     """);
+            System.out.print("Enter where do you want to play: ");
             try {
                 int player_chose = scn.nextInt();
                 switch (player_chose) {
@@ -335,14 +335,16 @@ public class Main {
 
 
     //Bonus idea:
-    public static int showMenuAndChose(){
+    public static int showMenuAndChose() throws Exception {
         Scanner scn = new Scanner(System.in);
         while (true) {
+            TimeUnit.MILLISECONDS.sleep(500);
             System.out.println("""
                     1- one round win
                     2- three rounds win
                     3- exit
                     """);
+            System.out.print("chose number from menu: ");
             try {
                 int user_chose = scn.nextInt();
                 switch (user_chose) {
