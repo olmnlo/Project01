@@ -289,7 +289,6 @@ public class Main {
             total_X = 0;
             total_O = 0;
         }
-//        return game_board[0][0].charAt(0) == game_board[1][0].charAt(0) && game_board[0][0].charAt(0) == game_board[2][0].charAt(0);
         return false;
     }
 
