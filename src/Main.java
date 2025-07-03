@@ -54,6 +54,8 @@ public class Main {
             runGame();
         }
     }
+
+
     public static int rounds(String[][] game_board, int who_play){
         while (true) {
             //who will play player or computer (Random from runGame())
@@ -85,6 +87,7 @@ public class Main {
         return who_play;
 
     }
+
     // joyful messages
     public static void printMsg(String msg){
         switch (msg) {
@@ -128,6 +131,7 @@ public class Main {
         }
 
     }
+
     // generate game board from scratch
     public static String[][] generateGameBoard(){
         return new String[][]{
@@ -136,7 +140,6 @@ public class Main {
                 {".", ".", "."}
         };
     }
-
 
     // print the board to show the updated one
     public static void printBoard(String[][] game_board, int who_is_play){
@@ -260,11 +263,13 @@ public class Main {
 
         return game_board;
     }
+
     //check is winner is the biggest method, but I make it on three steps :)
     public static boolean checkIsWinner(String[][] game_board){
 
         return checkRow(game_board, 0, 0) || checkColumn(game_board, 0, 0) || checkDiagonally(game_board, 0, 0);
     }
+
 
     public static boolean checkRow(String[][] game_board, int total_X, int total_O){
         for (String[] strings : game_board) {
@@ -284,6 +289,7 @@ public class Main {
         return false;
     }
 
+
     public static boolean checkColumn(String[][] game_board, int total_X, int total_O){
         for (int i = 0; i < game_board.length; i++) {
             for (int j = 0; j < game_board[i].length; j++) {
@@ -301,6 +307,7 @@ public class Main {
         }
         return false;
     }
+
 
     public static boolean checkDiagonally(String[][] board_game, int total_X, int total_O){
         for (int i = 0; i < board_game.length; i++) {
@@ -331,8 +338,6 @@ public class Main {
         return game_board[indexi][indexj].equals(".");
     }
 
-
-
     //Bonus idea:
     public static int showMenuAndChose() throws Exception {
         Scanner scn = new Scanner(System.in);
@@ -362,7 +367,6 @@ public class Main {
             }
         }
     }
-
 
     //agent play turn
     public static String[][] computer(String[][] game_board, boolean turn){
