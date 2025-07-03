@@ -24,8 +24,8 @@ public class Main {
                         game_board = player(game_board);
                         break;
                     case 1:
-//                    computer();
-                        System.out.println("Test");
+                        game_board = computer(game_board);
+                        break;
                 }
                 printBoard(game_board, who_play);
                 if (checkIsWinner(game_board) && who_play == 0){
@@ -260,9 +260,9 @@ public class Main {
             }else if(board_game[0][2].equals("O")) {
                 total_O++;
             }
-            if(board_game[2][2].equals("X")){
+            if(board_game[1][1].equals("X")){
                 total_X++;
-            }else if (board_game[2][2].equals("O")){
+            }else if (board_game[1][1].equals("O")){
                 total_O++;
             }
             if(board_game[2][0].equals("X")){
@@ -308,5 +308,21 @@ public class Main {
                 System.err.println("You must enter integer number");
             }
         }
+    }
+
+
+
+    public static String[][] computer(String[][] game_board){
+        Random rand = new Random();
+        boolean played = true;
+        while (played) {
+            int indix_i = rand.nextInt(3);
+            int indix_j = rand.nextInt(3);
+            if (checkIsEmptyPlace(game_board, indix_i, indix_j)) {
+                game_board[indix_i][indix_j] = "O";
+                played = false;
+            }
+        }
+        return game_board;
     }
 }
