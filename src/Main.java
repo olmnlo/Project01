@@ -15,10 +15,11 @@ public class Main {
         String[][] game_board = generateGameBoard();
 
         int round = showMenuAndChose();
-        int who_play = rand.nextInt(2);
+        int who_play;
         int score_p1 = 0;
         int score_computer = 0;
         while (round > 0){
+            who_play = rand.nextInt(2);
             System.out.println("round will start");
             TimeUnit.SECONDS.sleep(2);
 
@@ -53,9 +54,11 @@ public class Main {
                     break;
             }
             if (checkIsWinner(game_board) && who_play == 0){
+                printBoard(game_board, who_play);
                 printMsg("winner_p1");
                 break;
             }else if (checkIsWinner(game_board) && who_play == 1){
+                printBoard(game_board, who_play);
                 printMsg("winner_computer");
                 break;
             }
