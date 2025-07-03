@@ -8,6 +8,7 @@ public class Main {
         runGame();
     }
 
+
     public static void runGame() throws Exception {
         printMsg("welcome");
 
