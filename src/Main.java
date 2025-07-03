@@ -1,12 +1,15 @@
+import java.sql.Time;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         runGame();
     }
 
-    public static void runGame(){
+    public static void runGame() throws Exception {
         printMsg("welcome");
 
         Random rand = new Random();
@@ -19,6 +22,7 @@ public class Main {
         int score_computer = 0;
         while (round > 0){
             System.out.println("round will start");
+            TimeUnit.SECONDS.sleep(2);
 
             int result = rounds(game_board, who_play);
             if (result == 0){
