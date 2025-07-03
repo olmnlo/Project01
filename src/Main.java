@@ -270,8 +270,8 @@ public class Main {
             }else if (board_game[2][0].equals("O")){
                 total_O++;
             }
-            return total_X == 3 || total_O == 3;
         }
+        return total_X == 3 || total_O == 3;
     }
 
 
