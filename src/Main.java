@@ -311,7 +311,7 @@ public class Main {
             for (int i = 0; i < board_game.length; i++) {
                 if (board_game[i][board_game.length - 1  - i].equals("X")) {
                     total_X++;
-                } else if (board_game[i][board_game.length - 1 - i].equals("O")) {
+                } else if (board_game[i][board_game.length -1 - i].equals("O")) {
                     total_O++;
                 }
             }
