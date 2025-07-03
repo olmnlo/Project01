@@ -164,7 +164,7 @@ public class Main {
                             game_board[0][0] = "X";
                             played = false;
                         } else {
-                            System.out.println("It is not empty place you can not put your X here");
+                            System.err.println("It is not empty place you can not put your X here");
                         }
                         break;
                     case 2:
@@ -172,7 +172,7 @@ public class Main {
                             game_board[0][1] = "X";
                             played = false;
                         } else {
-                            System.out.println("It is not empty place you can not put your X here");
+                            System.err.println("It is not empty place you can not put your X here");
                         }
                         break;
                     case 3:
@@ -180,7 +180,7 @@ public class Main {
                             game_board[0][2] = "X";
                             played = false;
                         } else {
-                            System.out.println("It is not empty place you can not put your X here");
+                            System.err.println("It is not empty place you can not put your X here");
                         }
                         break;
                     case 4:
@@ -188,7 +188,7 @@ public class Main {
                             game_board[1][0] = "X";
                             played = false;
                         } else {
-                            System.out.println("It is not empty place you can not put your X here");
+                            System.err.println("It is not empty place you can not put your X here");
                         }
                         break;
                     case 5:
@@ -196,7 +196,7 @@ public class Main {
                             game_board[1][1] = "X";
                             played = false;
                         } else {
-                            System.out.println("It is not empty place you can not put your X here");
+                            System.err.println("It is not empty place you can not put your X here");
                         }
                         break;
                     case 6:
@@ -204,7 +204,7 @@ public class Main {
                             game_board[1][2] = "X";
                             played = false;
                         } else {
-                            System.out.println("It is not empty place you can not put your X here");
+                            System.err.println("It is not empty place you can not put your X here");
                         }
                         break;
                     case 7:
@@ -212,7 +212,7 @@ public class Main {
                             game_board[2][0] = "X";
                             played = false;
                         } else {
-                            System.out.println("It is not empty place you can not put your X here");
+                            System.err.println("It is not empty place you can not put your X here");
                         }
                         break;
                     case 8:
@@ -220,7 +220,7 @@ public class Main {
                             game_board[2][1] = "X";
                             played = false;
                         } else {
-                            System.out.println("It is not empty place you can not put your X here");
+                            System.err.println("It is not empty place you can not put your X here");
                         }
                         break;
                     case 9:
@@ -228,11 +228,11 @@ public class Main {
                             game_board[2][2] = "X";
                             played = false;
                         } else {
-                            System.out.println("It is not empty place you can not put your X here");
+                            System.err.println("It is not empty place you can not put your X here");
                         }
                         break;
                     default:
-                        System.out.println("You must chose from menu numbers only");
+                        System.err.println("You must chose from menu numbers only");
 
                 }
             }catch (Exception e){
@@ -349,6 +349,8 @@ public class Main {
                         return 3;
                     case 3:
                         return -1;
+                    default:
+                        System.err.println("you must chose from menu only");
                 }
             } catch (Exception e) {
                 scn.nextLine();// empty the scanner buffer
