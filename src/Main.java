@@ -1,4 +1,3 @@
-import java.awt.desktop.SystemEventListener;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -12,11 +11,7 @@ public class Main {
 
         Random rand = new Random();
 
-        String[][] game_board = {
-                {".", ".", "."},
-                {".", ".", "."},
-                {".", ".", "."}
-        };
+        String[][] game_board = generateGameBoard();
 
         int round = showMenuAndChose();
         int who_play = rand.nextInt(2);
@@ -30,7 +25,7 @@ public class Main {
                         break;
                     case 1:
 //                    computer();
-                        System.out.println();
+                        System.out.println("Test");
                 }
                 printBoard(game_board, who_play);
                 if (checkIsWinner(game_board) && who_play == 0){
@@ -46,7 +41,7 @@ public class Main {
                     who_play = 0;
                 }
             }
-            game_board = resetGameBoard();
+            game_board = generateGameBoard();
 
             round--;
         }
@@ -69,7 +64,7 @@ public class Main {
 
     }
 
-    public static String[][] resetGameBoard(){
+    public static String[][] generateGameBoard(){
         return new String[][]{
                 {".", ".", "."},
                 {".", ".", "."},
@@ -201,48 +196,82 @@ public class Main {
 
     public static boolean checkIsWinner(String[][] game_board){
 
-        return checkRow(game_board) || checkColumn(game_board);
+        return checkRow(game_board) || checkColumn(game_board) || checkDiagonally(game_board);
     }
 
     public static boolean checkRow(String[][] game_board){
-        int total_X_row = 0;
-        int total_O_row = 0;
+        int total_X = 0;
+        int total_O = 0;
         for (int i = 0; i < game_board.length; i++) {
             for (int j = 0; j < game_board[i].length; j++) {
                if(game_board[i][j].equals("X")){
-                   total_X_row++;
+                   total_X++;
                }else if (game_board[i][j].equals("O")) {
-                   total_O_row++;
+                   total_O++;
                }
             }
-            if(total_X_row == 3 || total_O_row == 3){
+            if(total_X == 3 || total_O == 3){
                 return true;
             }
-            total_X_row = 0;
-            total_O_row = 0;
+            total_X = 0;
+            total_O = 0;
         }
         return false;
     }
 
     public static boolean checkColumn(String[][] game_board){
-        int total_X_row = 0;
-        int total_O_row = 0;
+        int total_X = 0;
+        int total_O = 0;
         for (int i = 0; i < game_board.length; i++) {
             for (int j = 0; j < game_board[i].length; j++) {
                 if(game_board[j][i].equals("X")){
-                    total_X_row++;
+                    total_X++;
                 }else if(game_board[j][i].equals("O")){
-                    total_O_row++;
+                    total_O++;
                 }
             }
-            if(total_X_row == 3 || total_O_row == 3){
+            if(total_X == 3 || total_O == 3){
                 return true;
             }
-            total_X_row = 0;
-            total_O_row = 0;
+            total_X = 0;
+            total_O = 0;
         }
 //        return game_board[0][0].charAt(0) == game_board[1][0].charAt(0) && game_board[0][0].charAt(0) == game_board[2][0].charAt(0);
         return false;
+    }
+
+    public static boolean checkDiagonally(String[][] board_game){
+        int total_X = 0;
+        int total_O = 0;
+        for (int i = 0; i < board_game.length; i++) {
+            if(board_game[i][i].equals("X")){
+                total_X++;
+            } else if (board_game[i][i].equals("O")) {
+                total_O++;
+            }
+        }
+        if (total_X == 3 || total_O == 3){
+            return true;
+        }else {
+            total_O = 0;
+            total_X = 0;
+            if (board_game[0][2].equals("X")){
+                total_X++;
+            }else if(board_game[0][2].equals("O")) {
+                total_O++;
+            }
+            if(board_game[2][2].equals("X")){
+                total_X++;
+            }else if (board_game[2][2].equals("O")){
+                total_O++;
+            }
+            if(board_game[2][0].equals("X")){
+                total_X++;
+            }else if (board_game[2][0].equals("O")){
+                total_O++;
+            }
+            return total_X == 3 || total_O == 3;
+        }
     }
 
 
