@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Main {
     public static void main(String[] args) throws Exception {
+        //this will run the game
         runGame();
     }
 
@@ -13,22 +14,29 @@ public class Main {
         Random rand = new Random();
 
         String[][] game_board = generateGameBoard();
-
+        // default variables
         int round = showMenuAndChose();
         int who_play;
         int score_p1 = 0;
         int score_computer = 0;
+        //while loop to make how many times you want to play
         while (round > 0){
             who_play = rand.nextInt(2);
             System.out.println("round will start");
+            //sleep to make you ready for game :)
             TimeUnit.SECONDS.sleep(2);
 
+            //the round will start here
             int result = rounds(game_board, who_play);
+
+            //checks the result for the round
             if (result == 0){
                 score_p1++;
             }else {
                 score_computer++;
             }
+
+            //check the result out of three rounds
             if(score_p1 >= 2){
                 printMsg("winner_p1");
                 break;
@@ -36,15 +44,18 @@ public class Main {
                 printMsg("winner_computer");
                 break;
             }else {
-            game_board = generateGameBoard();
-            round--;
+                game_board = generateGameBoard();
+                round--;
             }
         }
-
-
+    //infinity game-run until you enter exit from menu
+        if (round != -1) {
+            runGame();
+        }
     }
     public static int rounds(String[][] game_board, int who_play){
         while (true) {
+            //who will play player or computer (Random from runGame())
             switch (who_play) {
                 case 0:
                     game_board = player(game_board, true);
@@ -53,6 +64,7 @@ public class Main {
                     game_board = computer(game_board, true);
                     break;
             }
+            //check is there a winner?
             if (checkIsWinner(game_board) && who_play == 0){
                 printBoard(game_board, who_play);
                 printMsg("winner_p1");
@@ -62,6 +74,7 @@ public class Main {
                 printMsg("winner_computer");
                 break;
             }
+            //swap between player every turn
             if (who_play == 0){
                 who_play = 1;
             }else {
@@ -71,7 +84,7 @@ public class Main {
         return who_play;
 
     }
-
+    // joyful messages
     public static void printMsg(String msg){
         switch (msg) {
             case "welcome":
@@ -114,7 +127,7 @@ public class Main {
         }
 
     }
-
+    // generate game board from scratch
     public static String[][] generateGameBoard(){
         return new String[][]{
                 {".", ".", "."},
@@ -124,7 +137,7 @@ public class Main {
     }
 
 
-
+    // print the board to show the updated one
     public static void printBoard(String[][] game_board, int who_is_play){
         if (who_is_play == 0){
             System.out.println("Player1 turn");
@@ -145,7 +158,7 @@ public class Main {
         }
     }
 
-
+    // player turn to play
     public static String[][] player(String[][] game_board, boolean turn){
         Scanner scn = new Scanner(System.in);
         while (turn) {
@@ -246,15 +259,13 @@ public class Main {
 
         return game_board;
     }
-
+    //check is winner is the biggest method, but I make it on three steps :)
     public static boolean checkIsWinner(String[][] game_board){
 
-        return checkRow(game_board) || checkColumn(game_board) || checkDiagonally(game_board);
+        return checkRow(game_board, 0, 0) || checkColumn(game_board, 0, 0) || checkDiagonally(game_board, 0, 0);
     }
 
-    public static boolean checkRow(String[][] game_board){
-        int total_X = 0;
-        int total_O = 0;
+    public static boolean checkRow(String[][] game_board, int total_X, int total_O){
         for (String[] strings : game_board) {
             for (String string : strings) {
                 if (string.equals("X")) {
@@ -272,9 +283,7 @@ public class Main {
         return false;
     }
 
-    public static boolean checkColumn(String[][] game_board){
-        int total_X = 0;
-        int total_O = 0;
+    public static boolean checkColumn(String[][] game_board, int total_X, int total_O){
         for (int i = 0; i < game_board.length; i++) {
             for (int j = 0; j < game_board[i].length; j++) {
                 if(game_board[j][i].equals("X")){
@@ -292,9 +301,7 @@ public class Main {
         return false;
     }
 
-    public static boolean checkDiagonally(String[][] board_game){
-        int total_X = 0;
-        int total_O = 0;
+    public static boolean checkDiagonally(String[][] board_game, int total_X, int total_O){
         for (int i = 0; i < board_game.length; i++) {
             if(board_game[i][i].equals("X")){
                 total_X++;
@@ -356,7 +363,7 @@ public class Main {
     }
 
 
-
+    //agent play turn
     public static String[][] computer(String[][] game_board, boolean turn){
         Random rand = new Random();
         printBoard(game_board, 1);
