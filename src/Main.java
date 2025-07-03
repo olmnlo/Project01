@@ -7,7 +7,7 @@ public class Main {
     }
 
     public static void runGame(){
-        printWelcomeMsg();
+        printMsg("welcome");
 
         Random rand = new Random();
 
@@ -15,20 +15,33 @@ public class Main {
 
         int round = showMenuAndChose();
         int who_play = rand.nextInt(2);
+        int score_p1 = 0;
+        int score_computer = 0;
         while (round > 0){
-            rounds(game_board, who_play);
+            System.out.println("round will start");
+
+            int result = rounds(game_board, who_play);
+            if (result == 0){
+                score_p1++;
+            }else {
+                score_computer++;
+            }
+            if(score_p1 >= 2){
+                printMsg("winner_p1");
+                break;
+            }else if(score_computer >= 2){
+                printMsg("winner_computer");
+                break;
+            }else {
             game_board = generateGameBoard();
             round--;
-
-
+            }
         }
 
 
     }
-    public static void rounds(String[][] game_board, int who_play){
-        boolean the_game = true;
-        while (the_game) {
-            printBoard(game_board, who_play);
+    public static int rounds(String[][] game_board, int who_play){
+        while (true) {
             switch (who_play) {
                 case 0:
                     game_board = player(game_board);
@@ -37,13 +50,12 @@ public class Main {
                     game_board = computer(game_board);
                     break;
             }
-            printBoard(game_board, who_play);
             if (checkIsWinner(game_board) && who_play == 0){
-                System.out.println("player1 is winner");
-                the_game = false;
+                printMsg("winner_p1");
+                break;
             }else if (checkIsWinner(game_board) && who_play == 1){
-                System.out.println("computer is winner");
-                the_game = false;
+                printMsg("winner_computer");
+                break;
             }
             if (who_play == 0){
                 who_play = 1;
@@ -51,20 +63,50 @@ public class Main {
                 who_play = 0;
             }
         }
+        return who_play;
+
     }
 
-    public static void printWelcomeMsg(){
-
-        System.out.println("""
-                
-                
-                 __      __   _                    _         _   _      _             _           \s
-                 \\ \\    / /__| |__ ___ _ __  ___  | |_ ___  | |_(_)__  | |_ __ _ __  | |_ ___  ___\s
-                  \\ \\/\\/ / -_) / _/ _ \\ '  \\/ -_) |  _/ _ \\ |  _| / _| |  _/ _` / _| |  _/ _ \\/ -_)
-                   \\_/\\_/\\___|_\\__\\___/_|_|_\\___|  \\__\\___/  \\__|_\\__|  \\__\\__,_\\__|  \\__\\___/\\___|
-                
-                
-                """);
+    public static void printMsg(String msg){
+        switch (msg) {
+            case "welcome":
+                System.out.println("""
+                    
+                     __      __   _                    _         _   _      _             _           \s
+                     \\ \\    / /__| |__ ___ _ __  ___  | |_ ___  | |_(_)__  | |_ __ _ __  | |_ ___  ___\s
+                      \\ \\/\\/ / -_) / _/ _ \\ '  \\/ -_) |  _/ _ \\ |  _| / _| |  _/ _` / _| |  _/ _ \\/ -_)
+                       \\_/\\_/\\___|_\\__\\___/_|_|_\\___|  \\__\\___/  \\__|_\\__|  \\__\\__,_\\__|  \\__\\___/\\___|
+                    
+                    """);
+                break;
+            case "winner_p1":
+                System.out.println("""
+                    
+                     ____   _       ____  __ __    ___  ____       ____   _____     __    __  ____  ____   ____     ___  ____ \s
+                    |    \\ | |     /    ||  |  |  /  _]|    \\     |    | / ___/    |  |__|  ||    ||    \\ |    \\   /  _]|    \\\s
+                    |  o  )| |    |  o  ||  |  | /  [_ |  D  )     |  | (   \\_     |  |  |  | |  | |  _  ||  _  | /  [_ |  D  )
+                    |   _/ | |___ |     ||  ~  ||    _]|    /      |  |  \\__  |    |  |  |  | |  | |  |  ||  |  ||    _]|    /\s
+                    |  |   |     ||  _  ||___, ||   [_ |    \\      |  |  /  \\ |    |  `  '  | |  | |  |  ||  |  ||   [_ |    \\\s
+                    |  |   |     ||  |  ||     ||     ||  .  \\     |  |  \\    |     \\      /  |  | |  |  ||  |  ||     ||  .  \\
+                    |__|   |_____||__|__||____/ |_____||__|\\_|    |____|  \\___|      \\_/\\_/  |____||__|__||__|__||_____||__|\\_|
+                    
+                    """);
+                break;
+            case "winner_computer":
+                System.out.println("""
+                    
+                        __   ___   ___ ___  ____   __ __  ______    ___  ____       ____   _____     __    __  ____  ____   ____     ___  ____ \s
+                       /  ] /   \\ |   |   ||    \\ |  |  ||      |  /  _]|    \\     |    | / ___/    |  |__|  ||    ||    \\ |    \\   /  _]|    \\\s
+                      /  / |     || _   _ ||  o  )|  |  ||      | /  [_ |  D  )     |  | (   \\_     |  |  |  | |  | |  _  ||  _  | /  [_ |  D  )
+                     /  /  |  O  ||  \\_/  ||   _/ |  |  ||_|  |_||    _]|    /      |  |  \\__  |    |  |  |  | |  | |  |  ||  |  ||    _]|    /\s
+                    /   \\_ |     ||   |   ||  |   |  :  |  |  |  |   [_ |    \\      |  |  /  \\ |    |  `  '  | |  | |  |  ||  |  ||   [_ |    \\\s
+                    \\     ||     ||   |   ||  |   |     |  |  |  |     ||  .  \\     |  |  \\    |     \\      /  |  | |  |  ||  |  ||     ||  .  \\
+                     \\____| \\___/ |___|___||__|    \\__,_|  |__|  |_____||__|\\_|    |____|  \\___|      \\_/\\_/  |____||__|__||__|__||_____||__|\\_|
+                    
+                    
+                    """);
+                break;
+        }
 
     }
 
@@ -103,11 +145,14 @@ public class Main {
         Scanner scn = new Scanner(System.in);
         boolean played = true;
         while (played) {
+            printBoard(game_board, 0);
             System.out.println("Enter where do you want to play: ");
-            System.out.println("""
-                    1- left up corner\t|\t4- left mid row|\t7- left down row
-                    2- center up row\t|\t5- center mid row\t|\t8- center down row
-                    3- right up corner\t|\t6- right mid row\t|\t9- right down row
+            System.out.println("""                    
+                    1|2|3
+                    -----
+                    4|5|6
+                    -----
+                    7|8|9
                     """);
             try {
                 int player_chose = scn.nextInt();
@@ -315,6 +360,7 @@ public class Main {
 
     public static String[][] computer(String[][] game_board){
         Random rand = new Random();
+        printBoard(game_board, 1);
         boolean played = true;
         while (played) {
             int indix_i = rand.nextInt(3);
