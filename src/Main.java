@@ -15,38 +15,42 @@ public class Main {
 
         int round = showMenuAndChose();
         int who_play = rand.nextInt(2);
-        boolean the_game = true;
         while (round > 0){
-            while (the_game) {
-                printBoard(game_board, who_play);
-                switch (who_play) {
-                    case 0:
-                        game_board = player(game_board);
-                        break;
-                    case 1:
-                        game_board = computer(game_board);
-                        break;
-                }
-                printBoard(game_board, who_play);
-                if (checkIsWinner(game_board) && who_play == 0){
-                    System.out.println("player1 is winner");
-                    the_game = false;
-                }else if (checkIsWinner(game_board) && who_play == 1){
-                    System.out.println("computer is winner");
-                    the_game = false;
-                }
-                if (who_play == 0){
-                    who_play = 1;
-                }else {
-                    who_play = 0;
-                }
-            }
+            rounds(game_board, who_play);
             game_board = generateGameBoard();
-
             round--;
+
+
         }
 
 
+    }
+    public static void rounds(String[][] game_board, int who_play){
+        boolean the_game = true;
+        while (the_game) {
+            printBoard(game_board, who_play);
+            switch (who_play) {
+                case 0:
+                    game_board = player(game_board);
+                    break;
+                case 1:
+                    game_board = computer(game_board);
+                    break;
+            }
+            printBoard(game_board, who_play);
+            if (checkIsWinner(game_board) && who_play == 0){
+                System.out.println("player1 is winner");
+                the_game = false;
+            }else if (checkIsWinner(game_board) && who_play == 1){
+                System.out.println("computer is winner");
+                the_game = false;
+            }
+            if (who_play == 0){
+                who_play = 1;
+            }else {
+                who_play = 0;
+            }
+        }
     }
 
     public static void printWelcomeMsg(){
@@ -294,13 +298,10 @@ public class Main {
                 int user_chose = scn.nextInt();
                 switch (user_chose) {
                     case 1:
-                        scn.nextLine();
                         return 1;
                     case 2:
-                        scn.nextLine();
                         return 3;
                     case 3:
-                        scn.nextLine();
                         return -1;
                 }
             } catch (Exception e) {
