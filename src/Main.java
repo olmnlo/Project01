@@ -19,8 +19,7 @@ public class Main {
         };
 
         int round = showMenuAndChose();
-//        int who_play = rand.nextInt(2);
-        int who_play = 0;
+        int who_play = rand.nextInt(2);
         boolean the_game = true;
         while (round > 0){
             while (the_game) {
@@ -33,14 +32,23 @@ public class Main {
 //                    computer();
                         System.out.println();
                 }
+                printBoard(game_board, who_play);
                 if (checkIsWinner(game_board) && who_play == 0){
                     System.out.println("player1 is winner");
+                    the_game = false;
                 }else if (checkIsWinner(game_board) && who_play == 1){
                     System.out.println("computer is winner");
+                    the_game = false;
+                }
+                if (who_play == 0){
+                    who_play = 1;
+                }else {
+                    who_play = 0;
                 }
             }
+            game_board = resetGameBoard();
 
-//            round--;
+            round--;
         }
 
 
@@ -59,6 +67,14 @@ public class Main {
                 
                 """);
 
+    }
+
+    public static String[][] resetGameBoard(){
+        return new String[][]{
+                {".", ".", "."},
+                {".", ".", "."},
+                {".", ".", "."}
+        };
     }
 
 
@@ -184,23 +200,18 @@ public class Main {
     }
 
     public static boolean checkIsWinner(String[][] game_board){
-        for (int i = 0; i < game_board.length; i++) {
-            for (int j = 0; j < game_board[i].length; j++) {
-                checkRow(game_board,i,j);
-                checkColumn(game_board, i,j);
-            }
-        }
-        return checkRow(game_board, 0,0);
+
+        return checkRow(game_board) || checkColumn(game_board);
     }
 
-    public static boolean checkRow(String[][] game_board, int indexi, int indexj){
+    public static boolean checkRow(String[][] game_board){
         int total_X_row = 0;
         int total_O_row = 0;
         for (int i = 0; i < game_board.length; i++) {
             for (int j = 0; j < game_board[i].length; j++) {
                if(game_board[i][j].equals("X")){
                    total_X_row++;
-               }else {
+               }else if (game_board[i][j].equals("O")) {
                    total_O_row++;
                }
             }
@@ -213,8 +224,25 @@ public class Main {
         return false;
     }
 
-    public static boolean checkColumn(String[][] game_board, int indexi, int indexj){
-        return game_board[0][0].charAt(0) == game_board[1][0].charAt(0) && game_board[0][0].charAt(0) == game_board[2][0].charAt(0);
+    public static boolean checkColumn(String[][] game_board){
+        int total_X_row = 0;
+        int total_O_row = 0;
+        for (int i = 0; i < game_board.length; i++) {
+            for (int j = 0; j < game_board[i].length; j++) {
+                if(game_board[j][i].equals("X")){
+                    total_X_row++;
+                }else if(game_board[j][i].equals("O")){
+                    total_O_row++;
+                }
+            }
+            if(total_X_row == 3 || total_O_row == 3){
+                return true;
+            }
+            total_X_row = 0;
+            total_O_row = 0;
+        }
+//        return game_board[0][0].charAt(0) == game_board[1][0].charAt(0) && game_board[0][0].charAt(0) == game_board[2][0].charAt(0);
+        return false;
     }
 
 
