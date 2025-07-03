@@ -134,7 +134,7 @@ public class Main {
         for (int i = 0; i < game_board.length; i++) {
             for (int j = 0; j < game_board[i].length; j++) {
                 System.out.print(game_board[i][j]+"\t");
-                if (j%5 == 0 || j%5 != 0 && j != game_board[i].length-1) {
+                if (j % 5 == 0 || j != game_board[i].length - 1) {
                     System.out.print("|\t");
                 }
             }
@@ -255,15 +255,15 @@ public class Main {
     public static boolean checkRow(String[][] game_board){
         int total_X = 0;
         int total_O = 0;
-        for (int i = 0; i < game_board.length; i++) {
-            for (int j = 0; j < game_board[i].length; j++) {
-               if(game_board[i][j].equals("X")){
-                   total_X++;
-               }else if (game_board[i][j].equals("O")) {
-                   total_O++;
-               }
+        for (String[] strings : game_board) {
+            for (String string : strings) {
+                if (string.equals("X")) {
+                    total_X++;
+                } else if (string.equals("O")) {
+                    total_O++;
+                }
             }
-            if(total_X == 3 || total_O == 3){
+            if (total_X == 3 || total_O == 3) {
                 return true;
             }
             total_X = 0;
