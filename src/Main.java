@@ -13,16 +13,17 @@ public class Main {
         Random rand = new Random();
 
         String[][] game_board = {
-                {"", "", ""},
-                {"", "", "6"},
-                {"7", "8", "9"}
+                {".", ".", "."},
+                {".", ".", "."},
+                {".", ".", "."}
         };
 
         int round = showMenuAndChose();
 //        int who_play = rand.nextInt(2);
         int who_play = 0;
+        boolean the_game = true;
         while (round > 0){
-            while (true) {
+            while (the_game) {
                 printBoard(game_board, who_play);
                 switch (who_play) {
                     case 0:
@@ -31,6 +32,11 @@ public class Main {
                     case 1:
 //                    computer();
                         System.out.println();
+                }
+                if (checkIsWinner(game_board) && who_play == 0){
+                    System.out.println("player1 is winner");
+                }else if (checkIsWinner(game_board) && who_play == 1){
+                    System.out.println("computer is winner");
                 }
             }
 
@@ -177,8 +183,43 @@ public class Main {
         return game_board;
     }
 
+    public static boolean checkIsWinner(String[][] game_board){
+        for (int i = 0; i < game_board.length; i++) {
+            for (int j = 0; j < game_board[i].length; j++) {
+                checkRow(game_board,i,j);
+                checkColumn(game_board, i,j);
+            }
+        }
+        return checkRow(game_board, 0,0);
+    }
+
+    public static boolean checkRow(String[][] game_board, int indexi, int indexj){
+        int total_X_row = 0;
+        int total_O_row = 0;
+        for (int i = 0; i < game_board.length; i++) {
+            for (int j = 0; j < game_board[i].length; j++) {
+               if(game_board[i][j].equals("X")){
+                   total_X_row++;
+               }else {
+                   total_O_row++;
+               }
+            }
+            if(total_X_row == 3 || total_O_row == 3){
+                return true;
+            }
+            total_X_row = 0;
+            total_O_row = 0;
+        }
+        return false;
+    }
+
+    public static boolean checkColumn(String[][] game_board, int indexi, int indexj){
+        return game_board[0][0].charAt(0) == game_board[1][0].charAt(0) && game_board[0][0].charAt(0) == game_board[2][0].charAt(0);
+    }
+
+
     public static boolean checkIsEmptyPlace(String[][] game_board, int indexi, int indexj){
-        return game_board[indexi][indexj].isEmpty();
+        return game_board[indexi][indexj].equals(".");
     }
 
 
