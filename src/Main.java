@@ -308,20 +308,12 @@ public class Main {
         }else {
             total_O = 0;
             total_X = 0;
-            if (board_game[0][2].equals("X")){
-                total_X++;
-            }else if(board_game[0][2].equals("O")) {
-                total_O++;
-            }
-            if(board_game[1][1].equals("X")){
-                total_X++;
-            }else if (board_game[1][1].equals("O")){
-                total_O++;
-            }
-            if(board_game[2][0].equals("X")){
-                total_X++;
-            }else if (board_game[2][0].equals("O")){
-                total_O++;
+            for (int i = 0; i < board_game.length; i++) {
+                if (board_game[i][board_game.length -1  - i].equals("X")) {
+                    total_X++;
+                } else if (board_game[i][board_game.length -1 - i].equals("O")) {
+                    total_O++;
+                }
             }
         }
         return total_X == 3 || total_O == 3;
