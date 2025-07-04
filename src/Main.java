@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class Main {
-    static int user_case;
+    static boolean player2;
     public static void main(String[] args) throws Exception {
         //this will run the XO game
         runTicTacToe();
@@ -76,7 +76,7 @@ public class Main {
                     game_board = player(game_board, true, "X");
                     break;
                 case 1:
-                    if (user_case != 1) {
+                    if (player2) {
                         game_board = computer(game_board, true);
                     }else {
                         game_board = player(game_board, true, "O");
@@ -87,15 +87,16 @@ public class Main {
             if (checkIsWinner(game_board) && who_play == 0){
                 printBoard(game_board, who_play, "X");
                 printMsg("winner_p1");
+                player2 = false;
                 break;
             }else if (checkIsWinner(game_board) && who_play == 1){
                 printBoard(game_board, who_play, "O");
-                if (user_case != 1) {
+                if (player2) {
                     printMsg("winner_computer");
                 }else {
                     printMsg("winner_p2");
                 }
-                user_case = -1;
+                player2 = false;
                 break;
             }
             //swap between player every turn
@@ -398,8 +399,8 @@ public class Main {
         while (true) {
             TimeUnit.MILLISECONDS.sleep(500);
             System.out.println("""
-                    1- one round win
-                    2- three rounds win
+                    1- one round win (computer)
+                    2- three rounds win (computer)
                     3- player1_X vs player2_O
                     4- exit
                     """);
@@ -418,7 +419,7 @@ public class Main {
                         );
                         System.out.print("chose number from menu: ");
                         user_chose = scn.nextInt();
-                        user_case = 1;
+                        player2 = true;
                         if (user_chose == 2){
                             return 3;
                         }else {
