@@ -255,7 +255,7 @@ public class Main {
 
                 }
             }catch (Exception e){
-                scn.nextLine();// empty the scanner buffer
+                scn.nextLine();// empty the scanner buffer it cause infinity loop if not use it
                 System.err.println("You cannot enter anything not Integer");
             }
 
@@ -362,7 +362,7 @@ public class Main {
                         System.err.println("you must chose from menu only");
                 }
             } catch (Exception e) {
-                scn.nextLine();// empty the scanner buffer
+                scn.nextLine();// empty the scanner buffer it cause infinity loop if not use it
                 System.err.println("You must enter integer number");
             }
         }
