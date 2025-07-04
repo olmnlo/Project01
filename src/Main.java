@@ -104,9 +104,24 @@ public class Main {
             }else {
                 who_play = 0;
             }
+            if (checkIsDraw(game_board)){
+                printMsg("draw");
+                game_board = generateGameBoard();
+            }
         }
         return who_play;
 
+    }
+
+    public static boolean checkIsDraw(String[][] game_board){
+        for (int i = 0; i < game_board.length; i++) {
+            for (int j = 0; j < game_board[i].length; j++) {
+                if (game_board[i][j].equals(".")){
+                return false;
+                }
+            }
+        }
+        return true;
     }
 
     // joyful messages
@@ -155,6 +170,17 @@ public class Main {
                          | |__| | | \\__ \\  \\ V  V /| | | | | | | |  __/ |  \s
                           \\____/  |_|___/   \\_/\\_/ |_|_| |_|_| |_|\\___|_|  \s
                         """);
+                break;
+            case "drow":
+                System.out.println(""" 
+                              _                   \s
+                             | |                  \s
+                           __| |_ __ __ ___      __
+                          / _` | '__/ _` \\ \\ /\\ / /
+                         | (_| | | | (_| |\\ V  V /\s
+                          \\__,_|_|  \\__,_| \\_/\\_/ \s
+                        """);
+                break;
         }
 
     }
@@ -374,7 +400,7 @@ public class Main {
             System.out.println("""
                     1- one round win
                     2- three rounds win
-                    3- player1 vs player2
+                    3- player1_X vs player2_O
                     4- exit
                     """);
             System.out.print("chose number from menu: ");
