@@ -105,7 +105,7 @@ public class Main {
                 who_play = 0;
             }
             if (checkIsDraw(game_board)){
-                printMsg("drow");
+                printMsg("draw");
                 game_board = generateGameBoard();
             }
         }
@@ -171,14 +171,14 @@ public class Main {
                           \\____/  |_|___/   \\_/\\_/ |_|_| |_|_| |_|\\___|_|  \s
                         """);
                 break;
-            case "drow":
+            case "draw":
                 System.out.println(""" 
-                             _                  \s
-                            | |                 \s
-                          __| |_ __ _____      __
-                         / _` | '__/ _ \\ \\ /\\ / /
-                        | (_| | | | (_) \\ V  V /\s
-                         \\__,_|_|  \\___/ \\_/\\_/ \s
+                             _                   \s
+                            | |                  \s
+                          __| |_ __ __ ___      __
+                         / _` | '__/ _` \\ \\ /\\ / /
+                        | (_| | | | (_| |\\ V  V /\s
+                         \\__,_|_|  \\__,_| \\_/\\_/ \s
                         """);
                 break;
         }
