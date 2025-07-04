@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 public class Main {
     public static void main(String[] args) throws Exception {
         //this will run the XO game
-        runTicTacToe();
+//        runTicTacToe();
         // if you exit from x/o you will start calculator
 
         //Calculator functionality in another folder /calculator:
@@ -399,45 +399,46 @@ public class Main {
         Calculator c1 = new Calculator();
         double num1, num2;
         outerLoop:
-        while (true){
+        while (true) {
+            try{
             c1.showMenu();
             System.out.print("chose: ");
             int user_operation = scn.nextInt();
-            switch (user_operation){
+            switch (user_operation) {
                 case 1:
                     System.out.print("Enter first number: ");
                     num1 = scn.nextInt();
                     System.out.print("Enter second number: ");
                     num2 = scn.nextInt();
-                    System.out.println(c1.addition(num1,num2));
+                    System.out.println(c1.addition(num1, num2));
                     break;
                 case 2:
                     System.out.print("Enter first number: ");
                     num1 = scn.nextInt();
                     System.out.print("Enter second number: ");
                     num2 = scn.nextInt();
-                    System.out.println(c1.subtraction(num1,num2));
+                    System.out.println(c1.subtraction(num1, num2));
                     break;
                 case 3:
                     System.out.print("Enter first number: ");
                     num1 = scn.nextInt();
                     System.out.print("Enter second number: ");
                     num2 = scn.nextInt();
-                    System.out.println(c1.multiplication(num1,num2));
+                    System.out.println(c1.multiplication(num1, num2));
                     break;
                 case 4:
                     System.out.print("Enter first number: ");
                     num1 = scn.nextInt();
                     System.out.print("Enter second number: ");
                     num2 = scn.nextInt();
-                    System.out.println(c1.division(num1,num2));
+                    System.out.println(c1.division(num1, num2));
                     break;
                 case 5:
                     System.out.print("Enter first number: ");
                     num1 = scn.nextInt();
                     System.out.print("Enter second number: ");
                     num2 = scn.nextInt();
-                    System.out.println(c1.modulus(num1,num2));
+                    System.out.println(c1.modulus(num1, num2));
                     break;
                 case 6:
                     System.out.print("Enter first number: ");
@@ -451,18 +452,18 @@ public class Main {
                     num1 = scn.nextInt();
                     System.out.print("Enter second number: ");
                     num2 = scn.nextInt();
-                    System.out.println(c1.maximum(num1,num2));
+                    System.out.println(c1.maximum(num1, num2));
                     break;
                 case 8:
                     boolean user_input_true = true;
                     ArrayList<Double> numbers_list = new ArrayList<>();
-                    while (user_input_true){
+                    while (user_input_true) {
                         System.out.print("Enter number: ");
                         num1 = scn.nextDouble();
                         numbers_list.add(num1);
                         System.out.print("do you want enter another number? enter anything to continue N to stop: ");
                         String user_want_stop = scn.next();
-                        if (user_want_stop.equalsIgnoreCase("N")){
+                        if (user_want_stop.equalsIgnoreCase("N")) {
                             user_input_true = false;
                         }
                     }
@@ -476,6 +477,11 @@ public class Main {
                     break;
                 default:
                     break outerLoop;
+
+            }
+        }catch(Exception e){
+                scn.nextLine();
+                System.err.println("you must enter numbers only");
             }
         }
     }
