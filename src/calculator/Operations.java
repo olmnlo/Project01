@@ -13,7 +13,7 @@ public interface Operations {
     public double multiplication(double num1, double num2);
 
     //Enter 4 to division the numbers
-    public double division(double num1, double num2) throws Exception;
+    public double division(double num1, double num2);
 
     //Enter 5 to modulus the numbers
     public double modulus(double num1, double num2);

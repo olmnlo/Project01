@@ -1,7 +1,6 @@
 package calculator;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Calculator implements Operations {
     ArrayList<Double> history = new ArrayList<>();
@@ -29,7 +28,7 @@ public class Calculator implements Operations {
     }
 
     @Override
-    public double division(double num1, double num2) throws ArithmeticException {
+    public double division(double num1, double num2){
         try {
             last_result = num1 / num2;
             setLastResult(last_result);

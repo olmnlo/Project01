@@ -8,12 +8,14 @@ import java.util.concurrent.TimeUnit;
 public class Main {
     public static void main(String[] args) throws Exception {
         //this will run the XO game
-//        runTicTacToe();
-        // if you exit from x/o you will start calculator
+        runTicTacToe();
+
+        // if you run both and exit from x/o you will start calculator
 
         //Calculator functionality in another folder /calculator:
         //this will run calculator:
-        runCalculator();
+
+//        runCalculator();
 
     }
 
