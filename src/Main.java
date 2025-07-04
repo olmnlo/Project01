@@ -1,15 +1,24 @@
+import calculator.Calculator;
+
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        //this will run the game
-        runGame();
+        //this will run the XO game
+        runTicTacToe();
+        // if you exit from x/o you will start calculator
+
+        //Calculator functionality in another folder /calculator:
+        //this will run calculator:
+        runCalculator();
+
     }
 
 
-    public static void runGame() throws Exception {
+    public static void runTicTacToe() throws Exception {
         printMsg("welcome");
 
         Random rand = new Random();
@@ -51,7 +60,7 @@ public class Main {
         }
     //infinity game-run until you enter exit from menu
         if (round != -1) {
-            runGame();
+            runTicTacToe();
         }
     }
 
@@ -381,5 +390,93 @@ public class Main {
             }
         }
         return game_board;
+    }
+
+// Calculator
+    //----------------------------------------------------------------------------------------
+    public static void runCalculator(){
+        Scanner scn = new Scanner(System.in);
+        Calculator c1 = new Calculator();
+        double num1, num2;
+        outerLoop:
+        while (true){
+            c1.showMenu();
+            System.out.print("chose: ");
+            int user_operation = scn.nextInt();
+            switch (user_operation){
+                case 1:
+                    System.out.print("Enter first number: ");
+                    num1 = scn.nextInt();
+                    System.out.print("Enter second number: ");
+                    num2 = scn.nextInt();
+                    System.out.println(c1.addition(num1,num2));
+                    break;
+                case 2:
+                    System.out.print("Enter first number: ");
+                    num1 = scn.nextInt();
+                    System.out.print("Enter second number: ");
+                    num2 = scn.nextInt();
+                    System.out.println(c1.subtraction(num1,num2));
+                    break;
+                case 3:
+                    System.out.print("Enter first number: ");
+                    num1 = scn.nextInt();
+                    System.out.print("Enter second number: ");
+                    num2 = scn.nextInt();
+                    System.out.println(c1.multiplication(num1,num2));
+                    break;
+                case 4:
+                    System.out.print("Enter first number: ");
+                    num1 = scn.nextInt();
+                    System.out.print("Enter second number: ");
+                    num2 = scn.nextInt();
+                    System.out.println(c1.division(num1,num2));
+                    break;
+                case 5:
+                    System.out.print("Enter first number: ");
+                    num1 = scn.nextInt();
+                    System.out.print("Enter second number: ");
+                    num2 = scn.nextInt();
+                    System.out.println(c1.modulus(num1,num2));
+                    break;
+                case 6:
+                    System.out.print("Enter first number: ");
+                    num1 = scn.nextInt();
+                    System.out.print("Enter second number: ");
+                    num2 = scn.nextInt();
+                    System.out.println(c1.minimum(num1, num2));
+                    break;
+                case 7:
+                    System.out.print("Enter first number: ");
+                    num1 = scn.nextInt();
+                    System.out.print("Enter second number: ");
+                    num2 = scn.nextInt();
+                    System.out.println(c1.maximum(num1,num2));
+                    break;
+                case 8:
+                    boolean user_input_true = true;
+                    ArrayList<Double> numbers_list = new ArrayList<>();
+                    while (user_input_true){
+                        System.out.print("Enter number: ");
+                        num1 = scn.nextDouble();
+                        numbers_list.add(num1);
+                        System.out.print("do you want enter another number? enter anything to continue N to stop: ");
+                        String user_want_stop = scn.next();
+                        if (user_want_stop.equalsIgnoreCase("N")){
+                            user_input_true = false;
+                        }
+                    }
+                    System.out.println(c1.average(numbers_list));
+                    break;
+                case 9:
+                    System.out.println(c1.getLastResult());
+                    break;
+                case 10:
+                    System.out.println(c1.listAllResultsHistory());
+                    break;
+                default:
+                    break outerLoop;
+            }
+        }
     }
 }
