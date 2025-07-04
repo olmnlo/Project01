@@ -6,6 +6,7 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class Main {
+    static int user_case;
     public static void main(String[] args) throws Exception {
         //this will run the XO game
         runTicTacToe();
@@ -72,20 +73,29 @@ public class Main {
             //who will play player or computer (Random from runGame())
             switch (who_play) {
                 case 0:
-                    game_board = player(game_board, true);
+                    game_board = player(game_board, true, "X");
                     break;
                 case 1:
-                    game_board = computer(game_board, true);
+                    if (user_case != 1) {
+                        game_board = computer(game_board, true);
+                    }else {
+                        game_board = player(game_board, true, "O");
+                    }
                     break;
             }
             //check is there a winner?
             if (checkIsWinner(game_board) && who_play == 0){
-                printBoard(game_board, who_play);
+                printBoard(game_board, who_play, "X");
                 printMsg("winner_p1");
                 break;
             }else if (checkIsWinner(game_board) && who_play == 1){
-                printBoard(game_board, who_play);
-                printMsg("winner_computer");
+                printBoard(game_board, who_play, "O");
+                if (user_case != 1) {
+                    printMsg("winner_computer");
+                }else {
+                    printMsg("winner_p2");
+                }
+                user_case = -1;
                 break;
             }
             //swap between player every turn
@@ -114,15 +124,12 @@ public class Main {
                 break;
             case "winner_p1":
                 System.out.println("""
-                    
-                     ____   _       ____  __ __    ___  ____       ____   _____     __    __  ____  ____   ____     ___  ____ \s
-                    |    \\ | |     /    ||  |  |  /  _]|    \\     |    | / ___/    |  |__|  ||    ||    \\ |    \\   /  _]|    \\\s
-                    |  o  )| |    |  o  ||  |  | /  [_ |  D  )     |  | (   \\_     |  |  |  | |  | |  _  ||  _  | /  [_ |  D  )
-                    |   _/ | |___ |     ||  ~  ||    _]|    /      |  |  \\__  |    |  |  |  | |  | |  |  ||  |  ||    _]|    /\s
-                    |  |   |     ||  _  ||___, ||   [_ |    \\      |  |  /  \\ |    |  `  '  | |  | |  |  ||  |  ||   [_ |    \\\s
-                    |  |   |     ||  |  ||     ||     ||  .  \\     |  |  \\    |     \\      /  |  | |  |  ||  |  ||     ||  .  \\
-                    |__|   |_____||__|__||____/ |_____||__|\\_|    |____|  \\___|      \\_/\\_/  |____||__|__||__|__||_____||__|\\_|
-                    
+                         __   __  _                _                      \s
+                         \\ \\ / / (_)              (_)                     \s
+                          \\ V /   _ ___  __      ___ _ __  _ __   ___ _ __\s
+                           > <   | / __| \\ \\ /\\ / / | '_ \\| '_ \\ / _ \\ '__|
+                          / . \\  | \\__ \\  \\ V  V /| | | | | | | |  __/ |  \s
+                         /_/ \\_\\ |_|___/   \\_/\\_/ |_|_| |_|_| |_|\\___|_|  \s
                     """);
                 break;
             case "winner_computer":
@@ -139,6 +146,15 @@ public class Main {
                     
                     """);
                 break;
+            case "winner_p2":
+                System.out.println(""" 
+                           ____    _                _                      \s
+                          / __ \\  (_)              (_)                     \s
+                         | |  | |  _ ___  __      ___ _ __  _ __   ___ _ __\s
+                         | |  | | | / __| \\ \\ /\\ / / | '_ \\| '_ \\ / _ \\ '__|
+                         | |__| | | \\__ \\  \\ V  V /| | | | | | | |  __/ |  \s
+                          \\____/  |_|___/   \\_/\\_/ |_|_| |_|_| |_|\\___|_|  \s
+                        """);
         }
 
     }
@@ -153,9 +169,9 @@ public class Main {
     }
 
     // print the board to show the updated one
-    public static void printBoard(String[][] game_board, int who_is_play){
+    public static void printBoard(String[][] game_board, int who_is_play, String symbol){
         if (who_is_play == 0){
-            System.out.println("Player1 turn");
+            System.out.println(symbol+ " turn");
         }else {
             System.out.println("computer turn");
         }
@@ -173,11 +189,11 @@ public class Main {
         }
     }
 
-    // player turn to play
-    public static String[][] player(String[][] game_board, boolean turn){
+    // player1 turn to play
+    public static String[][] player(String[][] game_board, boolean turn, String symbol){
         Scanner scn = new Scanner(System.in);
         while (turn) {
-            printBoard(game_board, 0);
+            printBoard(game_board, 0, symbol);
             System.out.println("""                    
                     1|2|3
                     -----
@@ -191,7 +207,7 @@ public class Main {
                 switch (player_chose) {
                     case 1:
                         if (checkIsEmptyPlace(game_board, 0, 0)) {
-                            game_board[0][0] = "X";
+                            game_board[0][0] = symbol;
                             turn = false;
                         } else {
                             System.err.println("It is not empty place you can not put your X here");
@@ -199,7 +215,7 @@ public class Main {
                         break;
                     case 2:
                         if (checkIsEmptyPlace(game_board, 0, 1)) {
-                            game_board[0][1] = "X";
+                            game_board[0][1] = symbol;
                             turn = false;
                         } else {
                             System.err.println("It is not empty place you can not put your X here");
@@ -207,7 +223,7 @@ public class Main {
                         break;
                     case 3:
                         if (checkIsEmptyPlace(game_board, 0, 2)) {
-                            game_board[0][2] = "X";
+                            game_board[0][2] = symbol;
                             turn = false;
                         } else {
                             System.err.println("It is not empty place you can not put your X here");
@@ -215,7 +231,7 @@ public class Main {
                         break;
                     case 4:
                         if (checkIsEmptyPlace(game_board, 1, 0)) {
-                            game_board[1][0] = "X";
+                            game_board[1][0] = symbol;
                             turn = false;
                         } else {
                             System.err.println("It is not empty place you can not put your X here");
@@ -223,7 +239,7 @@ public class Main {
                         break;
                     case 5:
                         if (checkIsEmptyPlace(game_board, 1, 1)) {
-                            game_board[1][1] = "X";
+                            game_board[1][1] = symbol;
                             turn = false;
                         } else {
                             System.err.println("It is not empty place you can not put your X here");
@@ -231,7 +247,7 @@ public class Main {
                         break;
                     case 6:
                         if (checkIsEmptyPlace(game_board, 1, 2)) {
-                            game_board[1][2] = "X";
+                            game_board[1][2] = symbol;
                             turn = false;
                         } else {
                             System.err.println("It is not empty place you can not put your X here");
@@ -239,7 +255,7 @@ public class Main {
                         break;
                     case 7:
                         if (checkIsEmptyPlace(game_board, 2, 0)) {
-                            game_board[2][0] = "X";
+                            game_board[2][0] = symbol;
                             turn = false;
                         } else {
                             System.err.println("It is not empty place you can not put your X here");
@@ -247,7 +263,7 @@ public class Main {
                         break;
                     case 8:
                         if (checkIsEmptyPlace(game_board, 2, 1)) {
-                            game_board[2][1] = "X";
+                            game_board[2][1] = symbol;
                             turn = false;
                         } else {
                             System.err.println("It is not empty place you can not put your X here");
@@ -255,7 +271,7 @@ public class Main {
                         break;
                     case 9:
                         if (checkIsEmptyPlace(game_board, 2, 2)) {
-                            game_board[2][2] = "X";
+                            game_board[2][2] = symbol;
                             turn = false;
                         } else {
                             System.err.println("It is not empty place you can not put your X here");
@@ -274,6 +290,7 @@ public class Main {
 
         return game_board;
     }
+
 
     //check is winner is the biggest method, but I make it on three steps :)
     public static boolean checkIsWinner(String[][] game_board){
@@ -357,7 +374,8 @@ public class Main {
             System.out.println("""
                     1- one round win
                     2- three rounds win
-                    3- exit
+                    3- player1 vs player2
+                    4- exit
                     """);
             System.out.print("chose number from menu: ");
             try {
@@ -368,6 +386,19 @@ public class Main {
                     case 2:
                         return 3;
                     case 3:
+                        System.out.println("""
+                            1- one round win
+                            2- three rounds win"""
+                        );
+                        System.out.print("chose number from menu: ");
+                        user_chose = scn.nextInt();
+                        user_case = 1;
+                        if (user_chose == 2){
+                            return 3;
+                        }else {
+                            return 1;
+                        }
+                    case 4:
                         return -1;
                     default:
                         System.err.println("you must chose from menu only");
@@ -382,7 +413,7 @@ public class Main {
     //agent play turn
     public static String[][] computer(String[][] game_board, boolean turn){
         Random rand = new Random();
-        printBoard(game_board, 1);
+        printBoard(game_board, 1, "O");
         while (turn) {
             int indix_i = rand.nextInt(3);
             int indix_j = rand.nextInt(3);
