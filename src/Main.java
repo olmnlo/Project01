@@ -76,7 +76,7 @@ public class Main {
                     game_board = player(game_board, true, "X");
                     break;
                 case 1:
-                    if (player2) {
+                    if (!player2) {
                         game_board = computer(game_board, true);
                     }else {
                         game_board = player(game_board, true, "O");
